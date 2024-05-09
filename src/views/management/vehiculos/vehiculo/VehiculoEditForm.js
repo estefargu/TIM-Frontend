@@ -40,14 +40,15 @@ const VehiculoEditForm = () =>{
     }
 
 
-    function handleReurnUI(event){
+    function handleReturnUI(event){
         navigate('/vehiculos/vehiculo');
     }
 
-    const handleSubmit = async()=>{
+    const handleSubmit = async(event)=>{
+        event.preventDefault();
         try{
             const response = await Axios.put(`http://localhost:1337/api/actualizarvehiculo/${placaVehiculo}`, vehiculoData);
-            console.log(response.data);
+            navigate('/vehiculos/vehiculo');
         }
         catch(e){
             console.log(e);
@@ -68,7 +69,7 @@ const VehiculoEditForm = () =>{
             <CCol xs={12}>
 
                 <CButton onClick={handleSubmit} color="primary" type="submit">Save</CButton>
-                <CButton onClick={handleReurnUI} color="primary" type="submit">Cancel</CButton>
+                <CButton onClick={handleReturnUI} color="primary" type="submit">Cancel</CButton>
 
             </CCol>
         </CForm>

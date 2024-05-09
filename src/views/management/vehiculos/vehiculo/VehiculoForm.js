@@ -8,12 +8,12 @@ import{
     CFormCheck,
     CButton
 } from '@coreui/react'
-import navigate from 'navigate';
-import { useParams } from 'react-router-dom';
+import { useNavigate,useParams } from 'react-router-dom';
 
 const VehiculoForm = () =>{
 
     const {placaVehiculo} = useParams();
+    const navigate = useNavigate();
 
     const [vehiculoData, setVehiculoData] = useState({
         placaVehiculo: '',
@@ -30,16 +30,17 @@ const VehiculoForm = () =>{
         });
     }
 
-    const handleSubmit = async()=>{
+    const handleSubmit = async(event)=>{
+        event.preventDefault();
         try{
             const response = await Axios.post('http://localhost:1337/api/crearvehiculo', vehiculoData);
-            console.log(response.data);
+            navigate('/vehiculos/vehiculo');
         }
         catch(e){
             console.log(e);
         }
     }
-    function handleReurnUI(event){
+    function handleReturnUI(event){
         navigate('/vehiculos/vehiculo');
     }
 
@@ -58,8 +59,8 @@ const VehiculoForm = () =>{
                 <CFormInput type="text" id="marca" name="marca" label="Marca del vehiculo" value={vehiculoData.marca} onChange={handleChange}/>
             </CCol>
             <CCol xs={12}>
-                <CButton color="primary" type="submit">Save</CButton>
-                <CButton color="primary" type="submit">Cancel</CButton>
+                <CButton onClick={handleSubmit} color="primary" type="submit">Save</CButton>
+                <CButton onClick={handleReturnUI} color="primary" type="submit">Cancel</CButton>
             </CCol>
         </CForm>
     )

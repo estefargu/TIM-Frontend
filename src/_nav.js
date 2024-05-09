@@ -4,7 +4,8 @@ import {
   cilDescription,
   cilSpeedometer,
   cilFastfood,
-  cilCarAlt
+  cilCarAlt,
+  cilPeople
 } from '@coreui/icons'
 import { CNavGroup, CNavItem, CNavTitle } from '@coreui/react'
 
@@ -29,6 +30,19 @@ const _nav = [
         component: CNavItem,
         name:'Vehiculos',
         to: '/vehiculos/vehiculo'
+      }
+    ]
+  },
+  {
+    component: CNavGroup,
+    name: 'Conductores',
+    to:'/conductores',
+    icon: <CIcon icon={cilPeople} customClassName="nav-icon" />,
+    items:[
+      {
+        component: CNavItem,
+        name:'Conductores',
+        to: '/conductores/conductor'
       }
     ]
   },
